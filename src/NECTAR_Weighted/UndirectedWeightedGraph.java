@@ -25,8 +25,8 @@ public class UndirectedWeightedGraph {
 	
 	// Only in used when working with WOCC.
 	// See WOCCMetaData for documentation.
-	public Map<Integer, Long> T;
-	private Map<Integer, Set<Integer>> VT;
+	// private Map<Integer, Long> T;
+	// private Map<Integer, Set<Integer>> VT;	
 	
 	//================================================================================
     // Constructors
@@ -43,7 +43,7 @@ public class UndirectedWeightedGraph {
 			Integer v = Integer.parseInt(parts[0].trim());
 			Integer u = Integer.parseInt(parts[1].trim());
 			// Weight is 1 by default.
-			Double w = 1.0;
+			double w = 1.0;
 			if (parts.length>2){
 				w = Double.parseDouble(parts[2].trim());
 			}
@@ -108,13 +108,13 @@ public class UndirectedWeightedGraph {
 	}
 
 	
-	public Map<Integer, Long> Triangles() {
+	/*public Map<Integer, Long> Triangles() {
 		return T;
 	}
 	
 	public Map<Integer, Set<Integer>> VTriangles() {
 		return VT;
-	}
+	}*/
 	
 	public int number_of_nodes() {		
 		return nodes.size();
@@ -129,8 +129,8 @@ public class UndirectedWeightedGraph {
 	}
 
 	public double get_edge_weight(Integer node, Integer neighbor) {		
-		if (neighbors(node).contains(neighbor)){
-			return edgesWeights.get((Integer)(Math.min(node, neighbor))).get((Integer)(Math.max(node, neighbor)));					
+		if (neighbors(node).contains(neighbor)){			
+			return edgesWeights.get((Integer)(Math.min(node, neighbor))).get((Integer)(Math.max(node, neighbor)));			
 		}
 		return 0;
 	}
@@ -139,7 +139,7 @@ public class UndirectedWeightedGraph {
 		return weightedsize;
 	}
 
-	public double weightedDegree(Integer node) {
+	public double weightedDegree(Integer node) {		
 		return weightedDegrees.get((Integer)node);
 	}
 	

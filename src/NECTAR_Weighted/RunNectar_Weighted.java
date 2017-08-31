@@ -1,6 +1,4 @@
 package NECTAR_Weighted;
-import java.io.BufferedReader;
-import java.io.FileReader;
 
 // Main class - running the NECTAR algorithm.
 public class RunNectar_Weighted {
