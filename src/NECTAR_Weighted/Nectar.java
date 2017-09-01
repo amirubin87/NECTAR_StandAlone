@@ -144,13 +144,15 @@ public class Nectar {
 	            Set<Integer> neighborComms = Find_Neighbor_Comms(node);
 	            for (Integer neighborComm : neighborComms){
 	            	
-	                double inc= metaData.CalcMetricImprovemant(neighborComm, node);
+	                double inc= metaData.CalcMetricImprovemant(neighborComm, node);	                
 	                comms_inc.put(neighborComm, inc);
 	                
 	            }	          
 	           
 	            Set<Integer> c_v_new =Keep_Best_Communities(comms_inc, betta);
-	            
+	            // If null - there is no real contribution in any one. 
+	            // Node will return to its original communities.
+	            if(c_v_new == null){c_v_new=c_v_original;}
 	            shouldMergeComms = amountOfScans > iteratioNumToStartMerge;
 				commsCouplesIntersectionRatio = metaData.SetCommsForNode(node, c_v_new, betta >1.0);
 				boolean haveMergedComms = false;
@@ -204,6 +206,9 @@ public class Nectar {
 	    for( double imp : comms_imps.values()){
 	    	bestImp = Math.max(bestImp, imp);
 	    }
+	    // There is no real contribution. We return null, and node will return to its original community.
+	    if(bestImp==0.0)
+	    	return null;
 	    
 	    Set<Integer> bestComs = new HashSet<Integer>();
 	    for(Entry<Integer, Double> entry: comms_imps.entrySet()){
